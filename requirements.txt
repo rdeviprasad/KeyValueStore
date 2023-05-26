@@ -1,0 +1,53 @@
+Implement a Key-Value Store Service which should persist its state across restarts.
+
+A Key-value Store is a service that enables a user to store a value linked to a key and it should also provide ways to retrieve that value using the key and also delete the value.
+A Persistent store is something that retains its state across restarts.
+
+So, here you will have to create a service that exposes REST Api’s to create, read, update and delete a key-value pair. This service should be fast(Any key-value store should be fast.) and should retain back the state when restarted.
+Expectations:
+
+Implement the REST endpoint for the service.
+Key can be any STRING and value can be arbitrary JSON. // how to store
+Design of the storage.
+Modularity, extensibility of the code.
+
+Assumptions:
+command line is fine for the start
+
+Entities :
+DataStore, JSONObject (value)
+DAO / Repository:
+DataStoreRepository
+Services: //
+DataStoreService - get(key), store(key)
+Controller:
+DataStoreController
+Driver:
+Runs the whole program one case after another
+start - init
+read file and store.
+
+2 cases
+1. Key doesn't exist previously - append to the file
+2. Key existed previously - delete the existing line, and append to end of file - O(N) -> O(1)
+
+
+a -> apple
+b -> ball
+a -> aeroplane
+b -> SentinalValue
+b - baloon
+
+Delete operation - delete all the lines from the file having a key
+2 cases
+1. Key doesn't exists - nothing to do
+2. Key exists - add sentinal to end of file with this key. O(1)
+
+
+cron job - remove duplicates from the file.
+
+
+
+
+Map<String, JSONEntity> // org.json.JsonObject
+JSONEntity - {String, getJSON()}
